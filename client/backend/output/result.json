@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "id": 0,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "age": 30,
+        "name": "Alice"
+      }
+    },
+    {
+      "id": 1,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "age": 24,
+        "name": "Bob"
+      }
+    },
+    {
+      "id": 2,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "age": 29,
+        "name": "Zaren"
+      }
+    },
+    {
+      "id": 3,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "age": 24,
+        "name": "David"
+      }
+    },
+    {
+      "id": 4,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "age": 35,
+        "name": "Amy"
+      }
+    },
+    {
+      "id": 5,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "age": 40,
+        "name": "Frank"
+      }
+    }
+  ],
+  "relationships": null,
+  "paths": null
+}

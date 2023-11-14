@@ -1,0 +1,840 @@
+{
+	"info": {
+		"_postman_id": "21919543-57f5-42aa-bd1b-149077f01141",
+		"name": "pp-server (local)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21738163",
+		"_collection_link": "https://cloudy-eclipse-520672.postman.co/workspace/Team-Workspace~8edbfb3a-e957-4683-8600-0af22addd11c/collection/21738163-21919543-57f5-42aa-bd1b-149077f01141?action=share&source=collection_link&creator=21738163"
+	},
+	"item": [
+		{
+			"name": "Initialize test data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/graph/populate-test-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"graph",
+						"populate-test-data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return all nodes & relationships",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response contains 6 nodes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes.length).to.eql(6);",
+							"});",
+							"",
+							"pm.test(\"Response contains 10 relationships\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.relationships.length).to.eql(10);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/graph/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"graph",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Not a POST request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Not a POST request\", function () {",
+							"  pm.response.to.have.status(405);",
+							"  pm.expect(pm.response.text().trim()).to.eql(\"Not a POST request\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bad request (w/o body)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"W/o body\", function () {",
+							"  pm.response.to.have.status(400);",
+							"  pm.expect(pm.response.text().trim()).to.eql(\"Bad request\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bad request (empty query)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Empty query field\", function () {",
+							"  pm.response.to.have.status(400);",
+							"  pm.expect(pm.response.text().trim()).to.eql(\"Query field is missing or empty\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"  \"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bad request (no query)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Empty query field\", function () {",
+							"  pm.response.to.have.status(400);",
+							"  pm.expect(pm.response.text().trim()).to.eql(\"Query field is missing or empty\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"test\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Match 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are exactly three people\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes.length).to.eql(3);",
+							"});",
+							"",
+							"pm.test(\"They are Alice, Bob, and Frank\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var names = jsonData.data.nodes.map(node => node.properties.name);",
+							"    pm.expect(names).to.have.members([\"Alice\", \"Bob\", \"Frank\"]);",
+							"});",
+							"",
+							"pm.test(\"Relationships and paths fields are null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.relationships).to.be.null;",
+							"    pm.expect(jsonData.data.paths).to.be.null;",
+							"});",
+							"",
+							"pm.test(\"Database state unchanged (db_changed is false)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.false;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (a:Person)-[r:Knows]->(b:Person {name: \\\"Zaren\\\"}) RETURN a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Match 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are exactly three relationships\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.relationships.length).to.eql(3);",
+							"});",
+							"",
+							"pm.test(\"Nodes and paths fields are null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes).to.be.null;",
+							"    pm.expect(jsonData.data.paths).to.be.null;",
+							"});",
+							"",
+							"pm.test(\"Database state unchanged (db_changed is false)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.false;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (a:Person)-[r:Knows]->(b:Person {name: 'Zaren'}) RETURN r\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Match 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are exactly nine paths\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.paths.length).to.eql(9);",
+							"});",
+							"",
+							"pm.test(\"Nodes and relationships fields are null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes).to.be.null;",
+							"    pm.expect(jsonData.data.relationships).to.be.null;",
+							"});",
+							"",
+							"pm.test(\"Database state unchanged (db_changed is false)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.false;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH path = (a:Person {name: 'Alice'})-[:Knows*]->(b:Person {name: 'David'}) RETURN path\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"All fields are null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes).to.be.null;",
+							"    pm.expect(jsonData.data.relationships).to.be.null;",
+							"    pm.expect(jsonData.data.paths).to.be.null;",
+							"});",
+							"",
+							"pm.test(\"Database state changed (db_changed is true)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"CREATE (:Pet:Dog {name: 'Max'})\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"All fields are null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes).to.be.null;",
+							"    pm.expect(jsonData.data.relationships).to.be.null;",
+							"    pm.expect(jsonData.data.paths).to.be.null;",
+							"});",
+							"",
+							"pm.test(\"Database state changed (db_changed is true)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (p:Person {name: 'Zaren'}), (d:Dog {name: 'Max'}) CREATE (p)-[:Keep]->(d)\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Match 4 (check Create result)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are two nodes and 1 relationship\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes.length).to.eql(2);",
+							"    pm.expect(jsonData.data.relationships.length).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Verify node and relationship data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    // Verify the first node (Person)",
+							"    pm.expect(jsonData.data.nodes[0].labels).to.eql([\"Person\"]);",
+							"    pm.expect(jsonData.data.nodes[0].properties.name).to.equal(\"Zaren\");",
+							"    ",
+							"    // Verify the second node (Dog)",
+							"    pm.expect(jsonData.data.nodes[1].labels).to.include.members([\"Pet\", \"Dog\"]);",
+							"    pm.expect(jsonData.data.nodes[1].properties.name).to.equal(\"Max\");",
+							"",
+							"    // Verify the relationship",
+							"    pm.expect(jsonData.data.relationships[0].type).to.equal(\"Keep\");",
+							"});",
+							"",
+							"pm.test(\"Database state unchanged (db_changed is false)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.false;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (p:Person {name: 'Zaren'})-[r:Keep]->(d:Dog {name: 'Max'}) RETURN p, r, d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set (update)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are one node\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes.length).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Frank's age updated to 50\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Verify the updated node (Frank)",
+							"    pm.expect(jsonData.data.nodes[0].properties.name).to.equal(\"Frank\");",
+							"    pm.expect(jsonData.data.nodes[0].properties.age).to.equal(50);",
+							"});",
+							"",
+							"pm.test(\"Database state changed (db_changed is true)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (p:Person {name: 'Frank'}) SET p.age = 50 RETURN p\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Database state changed (db_changed is true)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (b:Person {name: 'Bob'}) DETACH DELETE b\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Match 5 (check delete result)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API executed successfully\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There remains 6 nodes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.nodes.length).to.eql(6);",
+							"});",
+							"",
+							"pm.test(\"Verify Bob has been deleted\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var names = jsonData.data.nodes.map(node => node.properties.name);",
+							"    pm.expect(names).to.not.include(\"Bob\");",
+							"});",
+							"",
+							"pm.test(\"Database state unchanged (db_changed is false)\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.db_changed).to.be.false;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"MATCH (n) RETURN n\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid query",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Error executing query\", function () {",
+							"  pm.response.to.have.status(400);",
+							"  pm.expect(pm.response.text().trim()).to.eql(\"Error executing query\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"test123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/execute-query",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"execute-query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Initailize test data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/graph/populate-test-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"graph",
+						"populate-test-data"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
