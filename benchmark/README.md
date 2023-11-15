@@ -1,5 +1,4 @@
 # Benchmark
-(Graduate version only)
 A bash script that sends queries to the API and collects response times.
 
 ## 1. Execution
