@@ -15,7 +15,7 @@ queries=(
 
 # API endpoint
 # API_ENDPOINT="http://localhost:4000/api/check-query"
-API_ENDPOINT="http://3.18.178.249/api/check-query"
+API_ENDPOINT="http://3.17.72.43/api/check-query"
 
 # Variables for overall average
 total_avg_time=0

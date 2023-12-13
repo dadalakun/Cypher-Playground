@@ -2,13 +2,13 @@
 A bash script that sends queries to the API and collects response times.
 
 ## 1. Execution
-The IP address 3.18.178.249 is the remote server where I deployed the client component. You can choose to test on a local version.
+The IP address 3.17.72.43 is the remote server where I deployed the client component. You can choose to test on a local version.
 ``` bash
 #!/bin/bash
 ...
 # API endpoint
 API_ENDPOINT="http://localhost:4000/api/check-query"
-# API_ENDPOINT="http://3.18.178.249/api/check-query"
+# API_ENDPOINT="http://3.17.72.43/api/check-query"
 ...
 ```
 

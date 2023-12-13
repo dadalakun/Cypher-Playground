@@ -72,7 +72,7 @@ A web application with a React frontend and a Node.js backend. This is a quick o
 
 ## 2. Demo
 Client on AWS:
-[**Cypher playground**](http://3.18.178.249/)
+[**Cypher playground**](http://3.17.72.43/)
 
 ## 3. Set up using docker-compose
 1. Create a `.env` file to store necessary env variables
@@ -131,7 +131,7 @@ Open the web browser, go to `http://localhost:3000/`
 ## 5. Test
 (Check `project/benchmark` to see the benchmark test)
 
-To test the query using API, you can send POST request to: http://3.18.178.249/api/check-query, with "query" in the body (**in JSON format**):
+To test the query using API, you can send POST request to: http://3.17.72.43/api/check-query, with "query" in the body (**in JSON format**):
 
 <img src='https://i.imgur.com/a8v6pDS.png'>
 
