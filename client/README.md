@@ -72,7 +72,7 @@ A web application with a React frontend and a Node.js backend. This is a quick o
 
 ## 2. Demo
 Client on AWS:
-[**Cypher playground**](http://3.17.72.43/)
+[**Cypher playground**](http://3.18.108.27/)
 
 ## 3. Set up using docker-compose
 1. Create a `.env` file to store necessary env variables

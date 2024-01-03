@@ -6,7 +6,7 @@
 Cypher Playground is a tool to access a remote Neo4j Graph database. After receiving query from the user (React, Node.js), it checks the query (C++), sends to the remote server (GO), executes it and gives back the response in JSON format. The system also provides two kinds of visulaizer (OCaml, Smalltalk) that display the result in a more readable way.
 
 Client on AWS:
-[**Cypher playground**](http://3.17.72.43/)
+[**Cypher playground**](http://3.18.108.27/)
 
 ## Components
 

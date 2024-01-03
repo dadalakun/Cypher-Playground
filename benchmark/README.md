@@ -8,7 +8,7 @@ The IP address 3.17.72.43 is the remote server where I deployed the client compo
 ...
 # API endpoint
 API_ENDPOINT="http://localhost:4000/api/check-query"
-# API_ENDPOINT="http://3.17.72.43/api/check-query"
+# API_ENDPOINT="http://3.18.108.27/api/check-query"
 ...
 ```
 

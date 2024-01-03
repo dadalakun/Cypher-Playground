@@ -70,7 +70,7 @@ A Go backend which receives Cypher queries, executes using Neo4j Go driver and r
 
 ## 2. Demo
 Client on AWS:
-[**Cypher playground**](http://3.17.72.43/)
+[**Cypher playground**](http://3.18.108.27/)
 
 ## 3. Set up using docker-compose
 1. Build images and run containers
@@ -105,7 +105,7 @@ Client on AWS:
     <img src='https://i.imgur.com/sBfwYqJ.png'>
 
 ## 5. Test
-To test the query using API, you can send POST request to: http://3.133.111.194:8080/api/execute-query, with "query" in the body (**in JSON format**):
+To test the query using API, you can send POST request to: http://18.225.210.200:8080/api/execute-query, with "query" in the body (**in JSON format**):
 
 <img src='https://i.imgur.com/4smwVlC.png'>
 
